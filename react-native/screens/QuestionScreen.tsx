@@ -1,19 +1,19 @@
-import React from 'react';
-import { Dimensions, StyleSheet } from 'react-native';
-
+import React, { ReactNode, useState } from 'react';
+import { Dimensions, StyleSheet, SafeAreaView } from 'react-native';
 import { Text, View } from '../components/Themed';
-import { useFetchEmployees } from '../hooks/useFetchEmployees';
-import { RootStackScreenProps } from '../types';
+import { AnswerStatus, RootStackScreenProps } from '../types';
 import { QuizQuestionNameSelect } from '../components/QuizQuestionNameSelect';
-import { shuffle } from '../utils/shuffle';
+import { useQuiz } from '../hooks/useQuiz';
 
 const IMAGE_WIDTH = Dimensions.get('window').width;
 const IMAGE_HEIGHT = IMAGE_WIDTH * 1.3;
 
 export const QuestionScreen = ({ navigation }: RootStackScreenProps<'Question'>) => {
-  const employeeResult = useFetchEmployees();
+  const quizResponse = useQuiz({ questionCount: 10 });
+  const [questionIndex, setQuestionIndex] = useState(0);
+  const [answerStatus, setAnswerStatus] = useState<AnswerStatus>('UNANSWERED');
 
-  if (employeeResult.loading) {
+  if (quizResponse.loading) {
     return (
       <View>
         <Text style={styles.title}>{'Laster...'}</Text>
@@ -21,22 +21,33 @@ export const QuestionScreen = ({ navigation }: RootStackScreenProps<'Question'>)
     );
   }
 
-  if (employeeResult.error || employeeResult.employees === undefined) {
+  if (quizResponse.error || quizResponse.quiz === undefined) {
     return (
       <View>
-        <Text style={styles.title}>{employeeResult.error}</Text>
+        <Text style={styles.title}>{quizResponse.error}</Text>
       </View>
     );
   }
 
-  const employees = shuffle(employeeResult.employees);
+  const currentQuestion = quizResponse.quiz.questions[questionIndex];
+
+  let questionComponent: ReactNode;
+  switch (currentQuestion.type) {
+    case 'name-select':
+      questionComponent = (
+        <QuizQuestionNameSelect question={currentQuestion} onAnswer={setAnswerStatus} />
+      );
+      break;
+    case 'picture-select':
+      questionComponent = <Text>picture-select</Text>;
+      break;
+  }
 
   return (
-    <QuizQuestionNameSelect
-      employee={employees[0]}
-      wrongAnswers={employees.slice(1, 4)}
-      onContinue={() => navigation.navigate('Question')}
-    />
+    <SafeAreaView style={styles.container}>
+      {questionComponent}
+      <Text>{answerStatus}</Text>
+    </SafeAreaView>
   );
 };
 

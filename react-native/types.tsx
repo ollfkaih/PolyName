@@ -22,3 +22,27 @@ export type RootStackParamList = {
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
   NativeStackScreenProps<RootStackParamList, Screen>;
+
+export type AnswerStatus = 'CORRECT' | 'INCORRECT' | 'UNANSWERED';
+
+export interface QuestionBase {
+  type: string;
+}
+
+export interface NameSelectQuestion extends QuestionBase {
+  type: 'name-select';
+  correctAnswer: Employee;
+  incorrectAnswers: Employee[];
+}
+
+export interface PictureSelectQuestion extends QuestionBase {
+  type: 'picture-select';
+  correctAnswer: Employee;
+  incorrectAnswers: Employee[];
+}
+
+export type Question = NameSelectQuestion | PictureSelectQuestion;
+
+export interface Quiz {
+  questions: Question[];
+}
