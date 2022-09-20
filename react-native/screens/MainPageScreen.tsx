@@ -1,5 +1,5 @@
 import { StatusBar } from 'expo-status-bar';
-import { StyleSheet } from 'react-native';
+import { StyleSheet, ScrollView } from 'react-native';
 import * as eva from '@eva-design/eva';
 import { ApplicationProvider, Text, Button, Layout } from '@ui-kitten/components';
 import React from 'react';
@@ -17,52 +17,56 @@ const winningPlayers = [
   { name: 'Du', medal: '🤦‍♀️', points: 17 },
 ];
 
+const marginBetweenElements = 30;
+
 function MainPageScreen({ navigation }: RootStackScreenProps<'Root'>) {
   return (
     <>
       <Layout style={styles.container}>
         <Layout style={styles.fullWidth}>
-          <Text style={{ ...styles.heading, marginTop: 20, marginLeft: 10 }}>
-            PolyName
-          </Text>
-          <Text style={{ fontWeight: 'bold', marginTop: 20, marginLeft: 10 }}>
-            Ukas leaderboard
-          </Text>
-          <Layout style={styles.leaderboard}>
-            {winningPlayers
-              .sort((a, b) => b.points - a.points)
-              .map((player: Player) => (
-                <Layout key={player.name} style={styles.leaderboardItem}>
-                  <Text style={styles.white}>
-                    {player.medal} {player.name}
-                  </Text>
-                  <Text style={styles.white}>{player.points} p</Text>
-                </Layout>
-              ))}
-          </Layout>
+          <ScrollView>
+            <Text style={{ ...styles.heading, marginTop: 50, marginLeft: 10 }}>
+              PolyName
+            </Text>
+            <Text style={{ fontWeight: 'bold', marginTop: marginBetweenElements, marginLeft: 10 }}>
+              Ukas leaderboard
+            </Text>
+            <Layout style={styles.leaderboard}>
+              {winningPlayers
+                .sort((a, b) => b.points - a.points)
+                .map((player: Player) => (
+                  <Layout key={player.name} style={styles.leaderboardItem}>
+                    <Text style={styles.white}>
+                      {player.medal} {player.name}
+                    </Text>
+                    <Text style={styles.white}>{player.points} p</Text>
+                  </Layout>
+                ))}
+            </Layout>
 
-          <Text style={{ fontWeight: 'bold', marginTop: 20, marginLeft: 10 }}>
-            Ukas premie
-          </Text>
-          <Layout style={styles.leaderboard}>
-            <Text style={styles.white}>📩 Gavekort 1.500 kr</Text>
-          </Layout>
+            <Text style={{ fontWeight: 'bold', marginTop: marginBetweenElements, marginLeft: 10 }}>
+              Ukas premie
+            </Text>
+            <Layout style={styles.leaderboard}>
+              <Text style={styles.white}>📩 Gavekort 1.500 kr</Text>
+            </Layout>
 
-          <Text style={{ fontWeight: 'bold', marginTop: 20, marginLeft: 10 }}>
-            Tidligere vinnere
-          </Text>
-          <Layout style={{ ...styles.previousWinner, backgroundColor: '#5D135D' }}>
-            <Text style={styles.white}>Olav K</Text>
-            <Text style={styles.white}>Uke 38</Text>
-          </Layout>
-          <Layout style={styles.previousWinner}>
-            <Text style={{ color: '#5D135D' }}>Person A</Text>
-            <Text style={{ color: '#5D135D' }}>Uke 37</Text>
-          </Layout>
-          <Layout style={styles.previousWinner}>
-            <Text style={{ color: '#5D135D' }}>Person B</Text>
-            <Text style={{ color: '#5D135D' }}>Uke 36</Text>
-          </Layout>
+            <Text style={{ fontWeight: 'bold', marginTop: marginBetweenElements, marginLeft: 10 }}>
+              Tidligere vinnere
+            </Text>
+            <Layout style={{ ...styles.previousWinner, backgroundColor: '#5D135D' }}>
+              <Text style={styles.white}>Olav K</Text>
+              <Text style={styles.white}>Uke 38</Text>
+            </Layout>
+            <Layout style={styles.previousWinner}>
+              <Text style={{ color: '#5D135D' }}>Person A</Text>
+              <Text style={{ color: '#5D135D' }}>Uke 37</Text>
+            </Layout>
+            <Layout style={styles.previousWinner}>
+              <Text style={{ color: '#5D135D' }}>Person B</Text>
+              <Text style={{ color: '#5D135D' }}>Uke 36</Text>
+            </Layout>
+          </ScrollView>
         </Layout>
       </Layout>
       <Layout style={styles.startArea}>
