@@ -1,10 +1,11 @@
-import { Button } from '@ui-kitten/components';
 import React from 'react';
-import { Dimensions, Image, StyleSheet } from 'react-native';
+import { Dimensions, StyleSheet } from 'react-native';
 
 import { Text, View } from '../components/Themed';
 import { useFetchEmployees } from '../hooks/useFetchEmployees';
 import { RootStackScreenProps } from '../types';
+import { QuizQuestionNameSelect } from '../components/QuizQuestionNameSelect';
+import { shuffle } from '../utils/shuffle';
 
 const IMAGE_WIDTH = Dimensions.get('window').width;
 const IMAGE_HEIGHT = IMAGE_WIDTH * 1.3;
@@ -28,18 +29,14 @@ export const QuestionScreen = ({ navigation }: RootStackScreenProps<'Question'>)
     );
   }
 
-  const employee = employeeResult.employees[0];
+  const employees = shuffle(employeeResult.employees);
 
   return (
-    <View style={styles.container}>
-      <Image
-        style={styles.image}
-        key={employee.name}
-        source={{ uri: employee?.image }}
-        resizeMode="cover"
-      />
-      <Button onPress={() => navigation.goBack()}>{employee.name}</Button>
-    </View>
+    <QuizQuestionNameSelect
+      employee={employees[0]}
+      wrongAnswers={employees.slice(1, 4)}
+      onContinue={() => navigation.navigate('Question')}
+    />
   );
 };
 
