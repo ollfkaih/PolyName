@@ -1,16 +1,16 @@
-import { StatusBar } from "expo-status-bar";
-import React from "react";
-import { Button, Platform, StyleSheet } from "react-native";
+import { StatusBar } from 'expo-status-bar';
+import React from 'react';
+import { Button, Platform, StyleSheet } from 'react-native';
 
-import { Text, View } from "../components/Themed";
-import { RootStackScreenProps } from "../types";
+import { Text, View } from '../components/Themed';
+import { RootStackScreenProps } from '../types';
 
 export const ModalScreen = ({
   navigation,
   route: {
     params: { employee },
   },
-}: RootStackScreenProps<"Modal">) => {
+}: RootStackScreenProps<'Modal'>) => {
   const goBack = () => navigation.goBack();
 
   return (
@@ -25,7 +25,7 @@ export const ModalScreen = ({
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    alignItems: "center",
-    justifyContent: "center",
+    alignItems: 'center',
+    justifyContent: 'center',
   },
 });

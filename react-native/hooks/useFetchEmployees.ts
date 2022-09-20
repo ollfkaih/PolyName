@@ -1,8 +1,8 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
 export interface Employee {
   name: string;
-  gender: "male" | "female";
+  gender: 'male' | 'female';
   image: string;
   originalUrl: string;
 }
@@ -41,7 +41,7 @@ export const useFetchEmployees = (): EmployeeResponse => {
         });
       })
       .catch((error) => {
-        setError("Kunne ikke laste inn data");
+        setError('Kunne ikke laste inn data');
       })
       .finally(() => {
         setLoading(false);
@@ -68,14 +68,14 @@ const cleanUrl = (url: string) => {
   const aumlautRegexCap = /ä/g;
 
   return url
-    .replace(whiteSpaceRegex, "%20")
-    .replace(oeRegex, "%C3%B8")
-    .replace(oeRegexCap, "%C3%98")
-    .replace(aeRegex, "%C3%A6")
-    .replace(aeRegexCap, "%C3%86")
-    .replace(aaRegex, "%C3%A5")
-    .replace(aaRegexCap, "%C3%85")
-    .replace(eacuteRegexCap, "%C3%A9")
-    .replace(egraveRegexCap, "%C3%A8")
-    .replace(aumlautRegexCap, "%C3%A4");
+    .replace(whiteSpaceRegex, '%20')
+    .replace(oeRegex, '%C3%B8')
+    .replace(oeRegexCap, '%C3%98')
+    .replace(aeRegex, '%C3%A6')
+    .replace(aeRegexCap, '%C3%86')
+    .replace(aaRegex, '%C3%A5')
+    .replace(aaRegexCap, '%C3%85')
+    .replace(eacuteRegexCap, '%C3%A9')
+    .replace(egraveRegexCap, '%C3%A8')
+    .replace(aumlautRegexCap, '%C3%A4');
 };
