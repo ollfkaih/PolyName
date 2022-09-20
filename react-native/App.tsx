@@ -7,6 +7,7 @@ import useCachedResources from './hooks/useCachedResources';
 import useColorScheme from './hooks/useColorScheme';
 import Navigation from './navigation';
 import React from 'react';
+import MainPageScreen from './screens/MainPageScreen';
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
@@ -16,37 +17,11 @@ export default function App() {
     return null;
   } else {
     return (
-        <ApplicationProvider {...eva} theme={eva.light}>
-          <SafeAreaView style={styles.container}>
-            <View>
-              <Text style={styles.heading}>PolyName</Text>
-              <Text>leaderboard</Text>
-            </View>
-          </SafeAreaView>
-          <SafeAreaView style={styles.startArea}>
-            <View>
-              <Button title={"Start Quiz"}>Start quiz</Button>
-            </View>
-          </SafeAreaView>
-        </ApplicationProvider>
+      <ApplicationProvider {...eva} theme={eva.light}>
+        <SafeAreaView>
+          <MainPageScreen />
+        </SafeAreaView>
+      </ApplicationProvider>
     );
   }
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 0.8,
-    backgroundColor: '#fcabfc',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-  heading: {
-    fontSize: 30,
-  },
-  startArea: {
-    flex: 0.2,
-    backgroundColor: '#111',
-    fontSize: 50,
-    height: 100
-  }
-});
