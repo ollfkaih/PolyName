@@ -32,7 +32,7 @@ function MainPageScreen({ navigation }: RootStackScreenProps<'Root'>) {
             {winningPlayers
               .sort((a, b) => b.points - a.points)
               .map((player: Player) => (
-                <Layout style={styles.leaderboardItem}>
+                <Layout key={player.name} style={styles.leaderboardItem}>
                   <Text style={styles.white}>
                     {player.medal} {player.name}
                   </Text>
