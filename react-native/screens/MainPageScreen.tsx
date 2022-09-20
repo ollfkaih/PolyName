@@ -66,7 +66,11 @@ function MainPageScreen({ navigation }: RootStackScreenProps<'Root'>) {
         </Layout>
       </Layout>
       <Layout style={styles.startArea}>
-        <Button size="giant" style={styles.button}>
+        <Button
+          size="giant"
+          style={styles.button}
+          onPress={() => navigation.navigate('Question')}
+        >
           Start quiz
         </Button>
       </Layout>

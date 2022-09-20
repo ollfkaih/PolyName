@@ -1,9 +1,11 @@
 import React, { ReactNode, useState } from 'react';
 import { Dimensions, StyleSheet, SafeAreaView } from 'react-native';
 import { Text, View } from '../components/Themed';
-import { AnswerStatus, RootStackScreenProps } from '../types';
+import { AnswerStatus, Quiz, RootStackScreenProps } from '../types';
 import { QuizQuestionNameSelect } from '../components/QuizQuestionNameSelect';
 import { useQuiz } from '../hooks/useQuiz';
+import { QuizAnswerResult } from '../components/QuizAnswerResult';
+import { Layout } from '@ui-kitten/components';
 
 const IMAGE_WIDTH = Dimensions.get('window').width;
 const IMAGE_HEIGHT = IMAGE_WIDTH * 1.3;
@@ -29,13 +31,19 @@ export const QuestionScreen = ({ navigation }: RootStackScreenProps<'Question'>)
     );
   }
 
-  const currentQuestion = quizResponse.quiz.questions[questionIndex];
+  const quiz: Quiz = quizResponse.quiz;
+
+  const currentQuestion = quiz.questions[questionIndex];
 
   let questionComponent: ReactNode;
   switch (currentQuestion.type) {
     case 'name-select':
       questionComponent = (
-        <QuizQuestionNameSelect question={currentQuestion} onAnswer={setAnswerStatus} />
+        <QuizQuestionNameSelect
+          key={currentQuestion.correctAnswer.name}
+          question={currentQuestion}
+          onAnswer={setAnswerStatus}
+        />
       );
       break;
     case 'picture-select':
@@ -45,8 +53,21 @@ export const QuestionScreen = ({ navigation }: RootStackScreenProps<'Question'>)
 
   return (
     <SafeAreaView style={styles.container}>
-      {questionComponent}
-      <Text>{answerStatus}</Text>
+      <Layout>
+        {questionComponent}
+        {answerStatus !== 'UNANSWERED' && (
+          <QuizAnswerResult
+            answerStatus={answerStatus}
+            onNextQuestion={() => {
+              if (questionIndex + 1 >= quiz.questions.length) {
+                navigation.navigate('Root');
+              }
+              setQuestionIndex(questionIndex + 1);
+              setAnswerStatus('UNANSWERED');
+            }}
+          />
+        )}
+      </Layout>
     </SafeAreaView>
   );
 };
@@ -55,7 +76,7 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
   },
   image: {
     width: IMAGE_WIDTH,
