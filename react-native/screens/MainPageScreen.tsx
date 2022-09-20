@@ -5,7 +5,6 @@ import { ApplicationProvider, Text } from '@ui-kitten/components';
 import React from 'react';
 
 function MainPageScreen() {
-
   return (
     <>
       <View style={styles.container}>
@@ -28,21 +27,21 @@ function MainPageScreen() {
 }
 
 const styles = StyleSheet.create({
-    container: {
-        flex: 0.8,
-      backgroundColor: '#fcabfc',
-      alignItems: 'center',
-      justifyContent: 'center',
-    },
-    heading: {
-      fontSize: 30,
-    },
-    startArea: {
-      flex: 0.2,
-      backgroundColor: '#111',
-      fontSize: 50,
-      height: 100,
-    },
-  });
+  container: {
+    flex: 0.8,
+    backgroundColor: '#fcabfc',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  heading: {
+    fontSize: 30,
+  },
+  startArea: {
+    flex: 0.2,
+    backgroundColor: '#111',
+    fontSize: 50,
+    height: 100,
+  },
+});
 
 export default MainPageScreen;
