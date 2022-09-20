@@ -20,7 +20,9 @@ function MainPageScreen({ navigation }: RootStackScreenProps<'Root'>) {
       </View>
       <View style={styles.startArea}>
         <View>
-          <Button title={'Start Quiz'}>Start quiz</Button>
+          <Button title={'Start Quiz'} onPress={() => navigation.navigate('Question')}>
+            Start quiz
+          </Button>
         </View>
       </View>
     </>
