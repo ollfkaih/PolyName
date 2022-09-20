@@ -3,9 +3,9 @@ import { Button, ScrollView } from 'react-native';
 
 import { Text } from '../components/Themed';
 import { Employee, useFetchEmployees } from '../hooks/useFetchEmployees';
-import { RootTabScreenProps } from '../types';
+import { RootStackScreenProps } from '../types';
 
-export const TabOneScreen = ({ navigation }: RootTabScreenProps<'TabOne'>) => {
+export const TabOneScreen = ({ navigation }: RootStackScreenProps<'TabOne'>) => {
   const employeeResult = useFetchEmployees();
 
   const gotoDetails = (employee: Employee) => () =>

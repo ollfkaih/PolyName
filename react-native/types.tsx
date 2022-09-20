@@ -11,6 +11,9 @@ declare global {
 
 export type RootStackParamList = {
   Root: undefined;
+  Question: undefined;
+  TabOne: undefined;
+  TabTwo: undefined;
   Modal: {
     employee: Employee;
   };
@@ -19,4 +22,3 @@ export type RootStackParamList = {
 
 export type RootStackScreenProps<Screen extends keyof RootStackParamList> =
   NativeStackScreenProps<RootStackParamList, Screen>;
-

@@ -3,8 +3,9 @@ import { StyleSheet, Button, View } from 'react-native';
 import * as eva from '@eva-design/eva';
 import { ApplicationProvider, Text } from '@ui-kitten/components';
 import React from 'react';
+import { RootStackScreenProps } from '../types';
 
-function MainPageScreen() {
+function MainPageScreen({ navigation }: RootStackScreenProps<'Root'>) {
   return (
     <>
       <View style={styles.container}>

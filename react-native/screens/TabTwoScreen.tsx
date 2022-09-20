@@ -3,12 +3,12 @@ import { Dimensions, FlatList, Image, StyleSheet } from 'react-native';
 
 import { Text, View } from '../components/Themed';
 import { Employee, useFetchEmployees } from '../hooks/useFetchEmployees';
-import { RootTabScreenProps } from '../types';
+import { RootStackScreenProps } from '../types';
 
 const IMAGE_WIDTH = Dimensions.get('window').width;
 const IMAGE_HEIGHT = IMAGE_WIDTH * 1.3;
 
-export const TabTwoScreen = ({ navigation }: RootTabScreenProps<'TabTwo'>) => {
+export const TabTwoScreen = ({ navigation }: RootStackScreenProps<'TabTwo'>) => {
   const employeeResult = useFetchEmployees();
 
   const renderEmployee = ({ item }: { item: Employee }) => {
