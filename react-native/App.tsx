@@ -1,13 +1,12 @@
 import { StatusBar } from 'expo-status-bar';
-import { SafeAreaView, View, StyleSheet, Button } from 'react-native';
 import * as eva from '@eva-design/eva';
-import { ApplicationProvider, Layout, Text } from '@ui-kitten/components';
+import { ApplicationProvider } from '@ui-kitten/components';
 
 import useCachedResources from './hooks/useCachedResources';
 import useColorScheme from './hooks/useColorScheme';
 import Navigation from './navigation';
 import React from 'react';
-import MainPageScreen from './screens/MainPageScreen';
+import { SafeAreaProvider, SafeAreaView } from 'react-native-safe-area-context';
 
 export default function App() {
   const isLoadingComplete = useCachedResources();
@@ -18,9 +17,10 @@ export default function App() {
   } else {
     return (
       <ApplicationProvider {...eva} theme={eva.light}>
-        <SafeAreaView style={{ flex: 1 }}>
-          <MainPageScreen />
-        </SafeAreaView>
+        <SafeAreaProvider>
+          <Navigation colorScheme={colorScheme} />
+          <StatusBar />
+        </SafeAreaProvider>
       </ApplicationProvider>
     );
   }
