@@ -18,7 +18,7 @@ export default function App() {
   } else {
     return (
       <ApplicationProvider {...eva} theme={eva.light}>
-        <SafeAreaView>
+        <SafeAreaView style={{flex: 1}}>
           <MainPageScreen />
         </SafeAreaView>
       </ApplicationProvider>
