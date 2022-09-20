@@ -15,6 +15,7 @@ import { NotFoundScreen } from '../screens/NotFoundScreen';
 import { RootStackParamList } from '../types';
 import LinkingConfiguration from './LinkingConfiguration';
 import MainPageScreen from '../screens/MainPageScreen';
+import { QuestionScreen } from '../screens/QuestionScreen';
 
 export default function Navigation({ colorScheme }: { colorScheme: ColorSchemeName }) {
   return (
@@ -41,6 +42,7 @@ function RootNavigator() {
         component={MainPageScreen}
         options={{ headerShown: false }}
       />
+      <Stack.Screen name={'Question'} component={QuestionScreen} />
       <Stack.Screen
         name="NotFound"
         component={NotFoundScreen}

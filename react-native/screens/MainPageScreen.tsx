@@ -2,6 +2,8 @@ import { StatusBar } from 'expo-status-bar';
 import { StyleSheet } from 'react-native';
 import * as eva from '@eva-design/eva';
 import { ApplicationProvider, Text, Button, Layout } from '@ui-kitten/components';
+import React from 'react';
+import { RootStackScreenProps } from '../types';
 
 type Player = {
   name: string;
@@ -15,46 +17,58 @@ const winningPlayers = [
   { name: 'Du', medal: '🤦‍♀️', points: 17 },
 ];
 
-function MainPageScreen() {
+function MainPageScreen({ navigation }: RootStackScreenProps<'Root'>) {
   return (
     <>
       <Layout style={styles.container}>
         <Layout style={styles.fullWidth}>
-          <Text style={{...styles.heading, marginTop: 20, marginLeft: 10 }}>PolyName</Text>
-          <Text style={{ fontWeight: 'bold', marginTop: 20, marginLeft: 10 }}>Ukas leaderboard</Text>
+          <Text style={{ ...styles.heading, marginTop: 20, marginLeft: 10 }}>
+            PolyName
+          </Text>
+          <Text style={{ fontWeight: 'bold', marginTop: 20, marginLeft: 10 }}>
+            Ukas leaderboard
+          </Text>
           <Layout style={styles.leaderboard}>
-            {winningPlayers.sort((a, b) => b.points - a.points).map((player: Player) => (
+            {winningPlayers
+              .sort((a, b) => b.points - a.points)
+              .map((player: Player) => (
                 <Layout style={styles.leaderboardItem}>
-                    <Text style={styles.white}>
-                        {player.medal} {player.name}
-                    </Text>
-                    <Text style={styles.white}>{player.points} p</Text>
-              </Layout>
-            ))}
+                  <Text style={styles.white}>
+                    {player.medal} {player.name}
+                  </Text>
+                  <Text style={styles.white}>{player.points} p</Text>
+                </Layout>
+              ))}
           </Layout>
 
-          <Text style={{ fontWeight: 'bold', marginTop: 20, marginLeft: 10 }}>Ukas premie</Text>
+          <Text style={{ fontWeight: 'bold', marginTop: 20, marginLeft: 10 }}>
+            Ukas premie
+          </Text>
           <Layout style={styles.leaderboard}>
             <Text style={styles.white}>📩 Gavekort 1.500 kr</Text>
           </Layout>
 
-          <Text style={{ fontWeight: 'bold', marginTop: 20, marginLeft: 10 }}>Tidligere vinnere</Text>
-          <Layout style={{...styles.previousWinner, backgroundColor: '#5D135D'}}>
+          <Text style={{ fontWeight: 'bold', marginTop: 20, marginLeft: 10 }}>
+            Tidligere vinnere
+          </Text>
+          <Layout style={{ ...styles.previousWinner, backgroundColor: '#5D135D' }}>
             <Text style={styles.white}>Olav K</Text>
             <Text style={styles.white}>Uke 38</Text>
           </Layout>
           <Layout style={styles.previousWinner}>
-            <Text style={{color:'#5D135D'}}>Person A</Text>
-            <Text style={{color:'#5D135D'}}>Uke 37</Text>
+            <Text style={{ color: '#5D135D' }}>Person A</Text>
+            <Text style={{ color: '#5D135D' }}>Uke 37</Text>
           </Layout>
           <Layout style={styles.previousWinner}>
-            <Text style={{color:'#5D135D'}}>Person B</Text>
-            <Text style={{color:'#5D135D'}}>Uke 36</Text>
+            <Text style={{ color: '#5D135D' }}>Person B</Text>
+            <Text style={{ color: '#5D135D' }}>Uke 36</Text>
           </Layout>
         </Layout>
       </Layout>
       <Layout style={styles.startArea}>
-          <Button size='giant' style={styles.button} >Start quiz</Button>
+        <Button size="giant" style={styles.button}>
+          Start quiz
+        </Button>
       </Layout>
     </>
   );
@@ -122,7 +136,7 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     margin: 30,
     border: 0,
-  }
+  },
 });
 
 export default MainPageScreen;

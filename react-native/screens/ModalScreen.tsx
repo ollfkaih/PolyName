@@ -1,6 +1,5 @@
-import { StatusBar } from 'expo-status-bar';
 import React from 'react';
-import { Dimensions, Button, Platform, Image, StyleSheet } from 'react-native';
+import { Dimensions, Button, Image, StyleSheet } from 'react-native';
 
 import { Text, View } from '../components/Themed';
 import { RootStackScreenProps } from '../types';
