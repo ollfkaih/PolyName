@@ -2,6 +2,7 @@ import { Employee, useFetchEmployees } from './useFetchEmployees';
 import { NameSelectQuestion, Question, Quiz } from '../types';
 import { useState } from 'react';
 import { shuffle } from '../utils/shuffle';
+import { Asset } from 'expo-asset';
 
 interface QuizResponse {
   loading: boolean;
@@ -43,17 +44,27 @@ const createQuiz = (
     .map((employee) => createQuestion(employee, employees)),
 });
 
+const loadAssetsAsync = async (images: string[]) => {
+  return Promise.all(images.map((image) => Asset.fromModule(image).downloadAsync()));
+};
+
 export const useQuiz = ({ questionCount }: { questionCount: number }): QuizResponse => {
   const { loading, error, employees } = useFetchEmployees();
+  const [preloadingImages, setPreloadingImages] = useState(true);
 
   const [quiz, setQuiz] = useState<Quiz | undefined>(undefined);
 
   if (employees && !quiz) {
-    setQuiz(createQuiz(employees, { questionCount }));
+    const quiz = createQuiz(employees, { questionCount });
+    setPreloadingImages(true);
+    loadAssetsAsync(quiz.questions.map((q) => q.correctAnswer.image)).then(() =>
+      setPreloadingImages(false)
+    );
+    setQuiz(quiz);
   }
 
   return {
-    loading,
+    loading: loading || preloadingImages,
     error,
     quiz,
     resetQuiz: () => {
