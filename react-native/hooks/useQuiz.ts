@@ -18,7 +18,7 @@ const createNameSelectQuestion: QuestionGenerator<NameSelectQuestion> = (
   type: 'name-select',
   correctAnswer: employee,
   incorrectAnswers: shuffle(allEmployees)
-    .filter((e) => e.name !== employee.name)
+    .filter((e) => e.name !== employee.name && e.gender === employee.gender)
     .slice(0, 3),
 });
 
