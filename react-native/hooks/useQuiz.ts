@@ -16,7 +16,9 @@ const createNameSelectQuestion: QuestionGenerator<NameSelectQuestion> = (
 ) => ({
   type: 'name-select',
   correctAnswer: employee,
-  incorrectAnswers: shuffle(allEmployees).slice(0, 3),
+  incorrectAnswers: shuffle(allEmployees)
+    .filter((e) => e.name !== employee.name)
+    .slice(0, 3),
 });
 
 type QuestionGenerator<T extends Question = Question> = (
