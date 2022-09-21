@@ -6,6 +6,7 @@ import { QuizQuestionNameSelect } from '../components/QuizQuestionNameSelect';
 import { useQuiz } from '../hooks/useQuiz';
 import { QuizAnswerResult } from '../components/QuizAnswerResult';
 import { Layout } from '@ui-kitten/components';
+import { QuizProgressBar } from '../components/QuizProgressBar';
 
 const IMAGE_WIDTH = Dimensions.get('window').width;
 const IMAGE_HEIGHT = IMAGE_WIDTH * 1.3;
@@ -13,7 +14,13 @@ const IMAGE_HEIGHT = IMAGE_WIDTH * 1.3;
 export const QuestionScreen = ({ navigation }: RootStackScreenProps<'Question'>) => {
   const quizResponse = useQuiz({ questionCount: 10 });
   const [questionIndex, setQuestionIndex] = useState(0);
-  const [answerStatus, setAnswerStatus] = useState<AnswerStatus>('UNANSWERED');
+  const [answers, setAnswers] = useState<AnswerStatus[]>([]);
+
+  const getAnswerStatus = (questionIndex: number) => {
+    return answers[questionIndex] || 'UNANSWERED';
+  };
+
+  const currentAnswerStatus = getAnswerStatus(questionIndex);
 
   if (quizResponse.loading) {
     return (
@@ -42,7 +49,7 @@ export const QuestionScreen = ({ navigation }: RootStackScreenProps<'Question'>)
         <QuizQuestionNameSelect
           key={currentQuestion.correctAnswer.name}
           question={currentQuestion}
-          onAnswer={setAnswerStatus}
+          onAnswer={(status) => setAnswers([...answers, status])}
         />
       );
       break;
@@ -54,16 +61,20 @@ export const QuestionScreen = ({ navigation }: RootStackScreenProps<'Question'>)
   return (
     <SafeAreaView style={styles.container}>
       <Layout>
+        <QuizProgressBar
+          quiz={quiz}
+          answers={answers}
+          currentQuestionIndex={questionIndex}
+        />
         {questionComponent}
-        {answerStatus !== 'UNANSWERED' && (
+        {currentAnswerStatus !== 'UNANSWERED' && (
           <QuizAnswerResult
-            answerStatus={answerStatus}
+            answerStatus={currentAnswerStatus}
             onNextQuestion={() => {
               if (questionIndex + 1 >= quiz.questions.length) {
                 navigation.navigate('Root');
               }
               setQuestionIndex(questionIndex + 1);
-              setAnswerStatus('UNANSWERED');
             }}
           />
         )}
