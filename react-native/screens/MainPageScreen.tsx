@@ -89,6 +89,7 @@ function MainPageScreen({ navigation }: RootStackScreenProps<'Root'>) {
       </Layout>
       <Layout style={styles.startArea}>
         <Button
+          status="warning"
           size="giant"
           style={styles.button}
           onPress={() => navigation.navigate('Question')}
@@ -156,9 +157,7 @@ const styles = StyleSheet.create({
     color: 'white',
   },
   button: {
-    backgroundColor: '#FD7F00',
     height: 75,
-    borderColor: '#FD7F00',
     borderRadius: 4,
     margin: 30,
     border: 0,
