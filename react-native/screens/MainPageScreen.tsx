@@ -28,7 +28,13 @@ function MainPageScreen({ navigation }: RootStackScreenProps<'Root'>) {
             <Text style={{ ...styles.heading, marginTop: 50, marginLeft: 10 }}>
               PolyName
             </Text>
-            <Text style={{ fontWeight: 'bold', marginTop: marginBetweenElements, marginLeft: 10 }}>
+            <Text
+              style={{
+                fontWeight: 'bold',
+                marginTop: marginBetweenElements,
+                marginLeft: 10,
+              }}
+            >
               Ukas leaderboard
             </Text>
             <Layout style={styles.leaderboard}>
@@ -44,14 +50,26 @@ function MainPageScreen({ navigation }: RootStackScreenProps<'Root'>) {
                 ))}
             </Layout>
 
-            <Text style={{ fontWeight: 'bold', marginTop: marginBetweenElements, marginLeft: 10 }}>
+            <Text
+              style={{
+                fontWeight: 'bold',
+                marginTop: marginBetweenElements,
+                marginLeft: 10,
+              }}
+            >
               Ukas premie
             </Text>
             <Layout style={styles.leaderboard}>
               <Text style={styles.white}>📩 Gavekort 1.500 kr</Text>
             </Layout>
 
-            <Text style={{ fontWeight: 'bold', marginTop: marginBetweenElements, marginLeft: 10 }}>
+            <Text
+              style={{
+                fontWeight: 'bold',
+                marginTop: marginBetweenElements,
+                marginLeft: 10,
+              }}
+            >
               Tidligere vinnere
             </Text>
             <Layout style={{ ...styles.previousWinner, backgroundColor: '#5D135D' }}>
