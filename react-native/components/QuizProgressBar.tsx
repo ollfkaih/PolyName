@@ -12,16 +12,20 @@ export const QuizProgressBar = ({ quiz, answers, currentQuestionIndex }: Props) 
   return (
     <Layout style={styles.container}>
       {quiz.questions.map((question, index) => {
-        let color: string;
-        switch (answers[index]) {
+        let backgroundColor: string;
+        switch (answers[index] || 'UNANSWERED') {
           case 'CORRECT':
-            color = 'green';
+            backgroundColor = 'green';
             break;
           case 'INCORRECT':
-            color = 'red';
+            backgroundColor = 'red';
             break;
           case 'UNANSWERED':
-            color = 'gray';
+            if (index === currentQuestionIndex) {
+              backgroundColor = 'blue';
+            } else {
+              backgroundColor = 'gray';
+            }
             break;
         }
 
@@ -30,7 +34,7 @@ export const QuizProgressBar = ({ quiz, answers, currentQuestionIndex }: Props) 
             key={index}
             style={{
               ...styles.element,
-              backgroundColor: index === currentQuestionIndex ? 'blue' : color,
+              backgroundColor,
             }}
           />
         );
